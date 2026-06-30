@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>🏛️ BAVI LEO · Dashboard v3</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f172a;color:#e2e8f0;padding:20px;max-width:1500px;margin:0 auto}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #334155}
+.header h1{font-size:22px;color:#a78bfa}.header h1 span{color:#e2e8f0;font-weight:300}
+.header .date{color:#64748b;font-size:12px}
+.nav-bar{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.nav-link{background:#1e293b;border:1px solid #334155;border-radius:8px;padding:8px 14px;text-decoration:none;color:#cbd5e1;font-size:12px;font-weight:600;transition:.15s}
+.nav-link:hover{border-color:#a78bfa;background:#2e1065;color:#c4b5fd}
+.nav-link.active{background:#2e1065;border-color:#a78bfa}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:20px}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:20px}
+.card{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:14px}
+.card h3{font-size:.7rem;text-transform:uppercase;color:#64748b;margin-bottom:6px;letter-spacing:.05em}
+.big{font-size:1.5rem;font-weight:700}
+.small{color:#64748b;font-size:.75rem}
+h2{font-size:1.1rem;margin:20px 0 10px;color:#e2e8f0;border-bottom:1px solid #334155;padding-bottom:6px}
+.chart-box{background:#1e293b;border-radius:12px;padding:16px;border:1px solid #334155}
+.chart-box canvas{max-height:200px}
+.footer{text-align:center;color:#64748b;font-size:.7rem;margin-top:30px;padding-top:14px;border-top:1px solid #334155}
+.bureau-card{border-left:3px solid #334155;position:relative}
+.bureau-card .count{position:absolute;top:12px;right:14px;font-size:1.4rem;font-weight:700;opacity:.3}
+a{color:#3b82f6;text-decoration:none}a:hover{text-decoration:underline}
+.voyage-card{background:#1e293b;border:1px solid #334155;border-radius:8px;padding:10px 14px;display:flex;align-items:center;gap:10px}
+</style></head><body>
+
+<div class="header">
+  <div><h1>🏛️ BAVI LEO <span>— Dashboard v3</span></h1><div class="date">📅 30/06/2026 · 1 sessions · 639 msgs</div></div>
+  <div style="text-align:right"><div style="color:#a78bfa;font-size:22px;font-weight:700">1</div><div style="color:#64748b;font-size:10px">sessions BAVI</div></div>
+</div>
+
+<div class="nav-bar">
+  <a href="https://christophedanhier-hash.github.io/leo-global-dashboard/" class="nav-link">🌍 Global</a>
+  <a href="https://christophedanhier-hash.github.io/bavi-leo-dashboard/" class="nav-link active">🏛️ BAVI</a>
+  <a href="https://christophedanhier-hash.github.io/dashboard-leo/" class="nav-link">📊 KPI</a>
+  <a href="https://christophedanhier-hash.github.io/leo-metrics/" class="nav-link">💻 Machines</a>
+  <a href="https://christophedanhier-hash.github.io/crons-dashboard/" class="nav-link">⏱️ Crons</a>
+  <a href="https://christophedanhier-hash.github.io/github-dashboard/" class="nav-link">🐙 GitHub</a>
+  <a href="https://christophedanhier-hash.github.io/dashboard-n8n/" class="nav-link">🔧 n8n</a>
+</div>
+
+<!-- KPIs globaux -->
+<div class="grid">
+  <div class="card"><h3>📅 Sessions (14j)</h3><div class="big" style="color:#a78bfa">1</div><div class="small">1 aujourd'hui</div></div>
+  <div class="card"><h3>💬 Messages</h3><div class="big" style="color:#3b82f6">0.6k</div><div class="small">639.0 moy/session</div></div>
+  <div class="card"><h3>🧠 Tokens</h3><div class="big" style="color:#06b6d4">0.4M</div><div class="small">370k moy/session</div></div>
+  <div class="card"><h3>🔧 Outils</h3><div class="big">324</div><div class="small">324.0 moy/session</div></div>
+  <div class="card"><h3>💰 Budget</h3><div class="big" style="color:#22c55e">$60.31</div><div class="small">2010.3j restants ⚡ ×1.08 · stable +0%</div></div>
+  <div class="card"><h3>📈 Tendance</h3><div class="big" style="color:#22c55e">+100%</div><div class="small">vs semaine précédente</div></div>
+</div>
+
+<!-- Bureaux -->
+<h2>🏢 Bureaux (8)</h2>
+<div class="grid-4"><h2>🤖 Bots & Bureaux</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-bottom:20px"><div class="card bureau-card" style="border-left:4px solid #a78bfa;background:#1e293b;border:1px solid #334155;border-radius:12px;padding:16px">
+  <div style="display:flex;justify-content:space-between;align-items:start">
+    <div><h3 style="font-size:.9rem;color:#e2e8f0;margin:0 0 4px">🔧 LEO Infra</h3><div style="font-size:.7rem;color:#64748b">🏢 Professionnel</div></div>
+    <div style="font-size:2rem;font-weight:700;color:#a78bfa;opacity:.4">17</div>
+  </div>
+  <div style="margin-top:10px;border-top:1px solid #334155;padding-top:8px"><div style="display:flex;justify-content:space-between;font-size:.8rem;padding:2px 0"><span>📁 Michel</span><span style="color:#a78bfa">17 docs</span></div></div>
+</div><div class="card bureau-card" style="border-left:4px solid #3b82f6;background:#1e293b;border:1px solid #334155;border-radius:12px;padding:16px">
+  <div style="display:flex;justify-content:space-between;align-items:start">
+    <div><h3 style="font-size:.9rem;color:#e2e8f0;margin:0 0 4px">🧠 LEO Hermes</h3><div style="font-size:.7rem;color:#64748b">🏢 Professionnel</div></div>
+    <div style="font-size:2rem;font-weight:700;color:#3b82f6;opacity:.4">4</div>
+  </div>
+  <div style="margin-top:10px;border-top:1px solid #334155;padding-top:8px"><div style="display:flex;justify-content:space-between;font-size:.8rem;padding:2px 0"><span>📁 Robert</span><span style="color:#3b82f6">0 docs</span></div><div style="display:flex;justify-content:space-between;font-size:.8rem;padding:2px 0"><span>📁 Leo</span><span style="color:#3b82f6">4 docs</span></div></div>
+</div><div class="card bureau-card" style="border-left:4px solid #06b6d4;background:#1e293b;border:1px solid #334155;border-radius:12px;padding:16px">
+  <div style="display:flex;justify-content:space-between;align-items:start">
+    <div><h3 style="font-size:.9rem;color:#e2e8f0;margin:0 0 4px">🧭 Voyages</h3><div style="font-size:.7rem;color:#64748b">🏠 Privé</div></div>
+    <div style="font-size:2rem;font-weight:700;color:#06b6d4;opacity:.4">6</div>
+  </div>
+  <div style="margin-top:10px;border-top:1px solid #334155;padding-top:8px"><div style="display:flex;justify-content:space-between;font-size:.8rem;padding:2px 0"><span>📁 Sylvia</span><span style="color:#06b6d4">6 docs</span></div></div>
+</div><div class="card bureau-card" style="border-left:4px solid #f59e0b;background:#1e293b;border:1px solid #334155;border-radius:12px;padding:16px">
+  <div style="display:flex;justify-content:space-between;align-items:start">
+    <div><h3 style="font-size:.9rem;color:#e2e8f0;margin:0 0 4px">🎓 Émile</h3><div style="font-size:.7rem;color:#64748b">🏠 Privé</div></div>
+    <div style="font-size:2rem;font-weight:700;color:#f59e0b;opacity:.4">1</div>
+  </div>
+  <div style="margin-top:10px;border-top:1px solid #334155;padding-top:8px"><div style="display:flex;justify-content:space-between;font-size:.8rem;padding:2px 0"><span>📁 Emile</span><span style="color:#f59e0b">1 docs</span></div></div>
+</div></div>
+  <div class="card bureau-card" style="border-left-color:#3b82f6">
+    <div class="count" style="color:#3b82f6">0</div>
+    <h3>🏛️ Robert</h3>
+    <div style="font-size:.8rem">Conseil Stratégique IT</div>
+    <div class="small" style="margin-top:4px">0 analyse(s) · <a href="https://github.com/christophedanhier-hash/BAVI_LEO/tree/main/docs/wiki/agent-pro/bureau-robert">📁</a></div>
+  </div>
+  <div class="card bureau-card" style="border-left-color:#a78bfa">
+    <div class="count" style="color:#a78bfa">17</div>
+    <h3>🔧 Michel</h3>
+    <div style="font-size:.8rem">Infrastructure & Automatisation</div>
+    <div class="small" style="margin-top:4px">17 analyse(s) · <a href="https://github.com/christophedanhier-hash/BAVI_LEO/tree/main/docs/wiki/agent-pro/bureau-michel">📁</a></div>
+  </div>
+  <div class="card bureau-card" style="border-left-color:#22c55e">
+    <div class="count" style="color:#22c55e">0</div>
+    <h3>💰 Sophie</h3>
+    <div style="font-size:.8rem">Pilotage Économique</div>
+    <div class="small" style="margin-top:4px">0 analyse(s) · <a href="https://github.com/christophedanhier-hash/BAVI_LEO/tree/main/docs/wiki/agent-pro/bureau-sophie">📁</a></div>
+  </div>
+  <div class="card bureau-card" style="border-left-color:#06b6d4">
+    <div class="count" style="color:#06b6d4">6</div>
+    <h3>🧭 Sylvia</h3>
+    <div style="font-size:.8rem">Voyages & Roadbooks</div>
+    <div class="small" style="margin-top:4px">6 analyse(s) · <a href="https://github.com/christophedanhier-hash/BAVI_LEO/tree/main/docs/wiki/agent-pro/bureau-sylvia">📁</a></div>
+  </div>
+  <div class="card bureau-card" style="border-left-color:#f97316">
+    <div class="count" style="color:#f97316">3</div>
+    <h3>🏗️ Gérard</h3>
+    <div style="font-size:.8rem">Documentation T600</div>
+    <div class="small" style="margin-top:4px">3 analyse(s) · <a href="https://github.com/christophedanhier-hash/BAVI_LEO/tree/main/docs/wiki/agent-pro/bureau-gerard">📁</a></div>
+  </div>
+  <div class="card bureau-card" style="border-left-color:#ec4899">
+    <div class="count" style="color:#ec4899">1</div>
+    <h3>🩺 Virginie</h3>
+    <div style="font-size:.8rem">Orchestration Médicale</div>
+    <div class="small" style="margin-top:4px">1 analyse(s) · <a href="https://github.com/christophedanhier-hash/BAVI_LEO/tree/main/docs/wiki/agent-pro/bureau-virginie">📁</a></div>
+  </div>
+  <div class="card bureau-card" style="border-left-color:#f59e0b">
+    <div class="count" style="color:#f59e0b">1</div>
+    <h3>🎓 Émile</h3>
+    <div style="font-size:.8rem">Assistant Pédagogique</div>
+    <div class="small" style="margin-top:4px">1 analyse(s) · <a href="https://github.com/christophedanhier-hash/BAVI_LEO/tree/main/docs/wiki/agent-pro/bureau-emile">📁</a></div>
+  </div>
+  <div class="card bureau-card" style="border-left-color:#818cf8">
+    <div class="count" style="color:#818cf8">4</div>
+    <h3>🤖 LEO</h3>
+    <div style="font-size:.8rem">Dossiers & Analyses</div>
+    <div class="small" style="margin-top:4px">4 analyse(s) · <a href="https://github.com/christophedanhier-hash/BAVI_LEO/tree/main/docs/wiki/agent-pro/bureau-leo">📁</a></div>
+  </div>
+</div>
+<h2>📊 Activité (14 jours)</h2>
+<div class="chart-box"><canvas id="chart"></canvas></div>
+<script>
+new Chart(document.getElementById('chart'),{
+  type:'line',data:{
+    labels:["Wed 17/06", "Thu 18/06", "Fri 19/06", "Sat 20/06", "Sun 21/06", "Mon 22/06", "Tue 23/06", "Wed 24/06", "Thu 25/06", "Fri 26/06", "Sat 27/06", "Sun 28/06", "Mon 29/06", "Tue 30/06"],
+    datasets:[
+      {label:'Sessions',data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],borderColor:'#a78bfa',tension:.3},
+      {label:'Tokens (K)',data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 369793],borderColor:'#06b6d4',tension:.3,yAxisID:'y1'}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{labels:{color:'#64748b'}}},
+    scales:{
+      y:{grid:{color:'#334155'},ticks:{color:'#64748b'}},
+      y1:{position:'right',grid:{display:false},ticks:{color:'#64748b',callback:v=>Math.round(v/1000)+'K'}},
+      x:{grid:{color:'#334155'},ticks:{color:'#64748b',maxTicksLimit:7}}
+    }
+  }
+});
+</script><h2>🧠 Modèles utilisés</h2><div class="grid"><div class="card"><h3>deepseek-v4-flash</h3><div class="big">1</div><div class="small">sessions · 0.4M tokens</div></div></div>
+<h2>🔥 Top sessions</h2>
+<div style="overflow-x:auto"><table style="width:100%;font-size:.8rem">
+<tr><th style="color:#64748b">Session</th><th style="color:#64748b">Date</th><th style="color:#64748b">Msgs</th><th style="color:#64748b">Tokens</th><th style="color:#64748b">Outils</th></tr><tr><td title="Présentation d'Hermes et profil">Présentation d'Hermes et profil</td><td>30/06 15:11</td><td>639</td><td>370k</td><td>324</td></tr></table></div><div class="footer">🏛️ BAVI LEO v3 · 30/06/2026 20:15 · <a href="https://github.com/christophedanhier-hash/bavi-leo-dashboard">GitHub</a></div>
+</body></html>
